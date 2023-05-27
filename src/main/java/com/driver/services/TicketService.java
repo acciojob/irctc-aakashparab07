@@ -41,6 +41,23 @@ public class TicketService {
         //Save the bookedTickets in the train Object
         //Also in the passenger Entity change the attribute bookedTickets by using the attribute bookingPersonId.
        //And the end return the ticketId that has come from db
+        List<Passenger> passengers = passengerRepository.findAll();
+        boolean isValid = false;
+        for(Passenger passenger : passengers)
+        {
+            if(bookTicketEntryDto.getBookingPersonId()==passenger.getPassengerId())
+            {
+                isValid = true;
+            }
+        }
+        if(!isValid)
+        {
+            throw new Exception("Invalid Passenger Id");
+        }
+
+
+
+        List<Train> bookedTicket  = trainRepository.findAll();
 
        return null;
 
